@@ -396,75 +396,104 @@
   </div>
 
   <script>
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, initializing presentation...');
+      
     const slides = Array.from(document.querySelectorAll('.slide'));
-    let i = 0; const total = slides.length;
+      let currentSlide = 0;
+      const totalSlides = slides.length;
     const bar = document.getElementById('bar');
     const count = document.getElementById('count');
 
-    function show(idx){
-      slides.forEach((s,j)=>{ s.classList.toggle('active', j===idx); });
-      const pct = ((idx+1)/total)*100; bar.style.width = pct+'%';
-      count.textContent = (idx+1)+' / '+total;
-    }
+      console.log('Found slides:', totalSlides);
 
-    function next(){ 
-      i = Math.min(total-1, i+1); 
-      show(i); 
-      console.log('Next slide:', i+1);
-    }
-    function prev(){ 
-      i = Math.max(0, i-1); 
-      show(i); 
-      console.log('Previous slide:', i+1);
-    }
+      function updateDisplay() {
+        // Hide all slides
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('active', index === currentSlide);
+        });
+        
+        // Update progress bar
+        const progress = ((currentSlide + 1) / totalSlides) * 100;
+        bar.style.width = progress + '%';
+        
+        // Update counter
+        count.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        
+        console.log('Current slide:', currentSlide + 1, 'of', totalSlides);
+      }
 
-    // Enhanced keyboard event handling
-    document.addEventListener('keydown', function(e){
-      console.log('Key pressed:', e.key);
-      if(e.key === 'ArrowRight' || e.key === 'Right') {
-        e.preventDefault();
-        next();
-      }
-      if(e.key === 'ArrowLeft' || e.key === 'Left') {
-        e.preventDefault();
-        prev();
-      }
-      if(e.key.toLowerCase() === 'f') {
-        e.preventDefault();
-        const el = document.documentElement; 
-        if(!document.fullscreenElement){ 
-          el.requestFullscreen?.(); 
-        } else { 
-          document.exitFullscreen?.(); 
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateDisplay();
         }
       }
-    });
 
-    // Click to advance
-    document.getElementById('slides').addEventListener('click', function(e) {
-      // Don't advance if clicking on interactive elements
-      if (!e.target.closest('button') && !e.target.closest('a')) {
-        next();
+      function prevSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateDisplay();
+        }
       }
-    });
 
-    // Hash navigation
-    function fromHash(){
-      const n = parseInt(location.hash.replace('#',''),10);
-      if(!isNaN(n) && n>=1 && n<=total){ 
-        i = n-1; 
-        show(i); 
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        console.log('Key pressed:', e.key);
+        
+        switch(e.key) {
+          case 'ArrowRight':
+          case 'Right':
+            e.preventDefault();
+            nextSlide();
+            break;
+          case 'ArrowLeft':
+          case 'Left':
+            e.preventDefault();
+            prevSlide();
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen?.();
+            } else {
+              document.exitFullscreen?.();
+            }
+            break;
+        }
+      });
+
+      // Click to advance
+      document.getElementById('slides').addEventListener('click', function(e) {
+        if (!e.target.closest('button') && !e.target.closest('a')) {
+          nextSlide();
+        }
+      });
+
+      // Hash navigation
+      function handleHashChange() {
+        const hash = location.hash.replace('#', '');
+        const slideNumber = parseInt(hash, 10);
+        if (!isNaN(slideNumber) && slideNumber >= 1 && slideNumber <= totalSlides) {
+          currentSlide = slideNumber - 1;
+          updateDisplay();
+        }
       }
-    }
-    window.addEventListener('hashchange', fromHash);
-    
-    // Initialize
-    fromHash();
-    show(0);
-    
-    // Make sure the page can receive focus for keyboard events
-    document.body.tabIndex = -1;
-    document.body.focus();
+
+      window.addEventListener('hashchange', handleHashChange);
+      
+      // Initialize
+      handleHashChange();
+      updateDisplay();
+      
+      // Ensure focus for keyboard events
+      document.body.tabIndex = -1;
+      document.body.focus();
+      
+      console.log('Presentation initialized successfully');
+    });
   </script>
 </body>
 </html>
