@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Navigation Test</title>
+    <style>
+      .slide {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin: 10px;
+      }
+      .slide.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Navigation Test</h1>
+    <div id="slides">
+      <div class="slide active">Slide 1</div>
+      <div class="slide">Slide 2</div>
+      <div class="slide">Slide 3</div>
+    </div>
+    <p>Use arrow keys to navigate</p>
+    <div id="count">1 / 3</div>
+
+    <script>
+      console.log("Script loading...");
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      let i = 0;
+      const total = slides.length;
+      const count = document.getElementById("count");
+
+      function show(idx) {
+        console.log("Showing slide:", idx);
+        slides.forEach((s, j) => {
+          s.classList.toggle("active", j === idx);
+        });
+        count.textContent = idx + 1 + " / " + total;
+      }
+
+      function next() {
+        i = Math.min(total - 1, i + 1);
+        show(i);
+        console.log("Next slide:", i + 1);
+      }
+
+      function prev() {
+        i = Math.max(0, i - 1);
+        show(i);
+        console.log("Previous slide:", i + 1);
+      }
+
+      document.addEventListener("keydown", function (e) {
+        console.log("Key pressed:", e.key);
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          next();
+        }
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prev();
+        }
+      });
+
+      // Make sure body can receive focus
+      document.body.tabIndex = -1;
+      document.body.focus();
+
+      console.log("Script loaded, slides found:", slides.length);
+    </script>
+  </body>
+</html>

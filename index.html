@@ -1,499 +1,655 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fridge Business – WhatsApp Workflow (12‑Slide Deck)</title>
-  <style>
-    :root{
-      --bg:#ffffff; 
-      --card:#f8f9fa; 
-      --text:#2d3a3f; 
-      --muted:#6c757d; 
-      --accent:#00bcd4; /* light teal from logo */
-      --accent2:#2d3a3f; /* dark slate from logo */
-      --shadow: 0 10px 30px rgba(0,0,0,.15);
-    }
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:16px/1.5 'Outfit', system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial}
-    .deck{height:100%;display:grid;grid-template-rows:1fr 60px}
-    .slides{height:100%;display:grid;place-items:center;overflow:hidden;position:relative}
-    .slide{width:min(1100px,92vw);height:min(640px,78vh);background:#fff;border:1px solid rgba(0,0,0,.08); box-shadow:var(--shadow); border-radius:24px; padding:40px 48px; position:absolute; opacity:0; transform:translateX(40px) scale(.98); transition:opacity .35s ease, transform .45s cubic-bezier(.2,.7,.1,1)}
-    .slide.active{opacity:1; transform:translateX(0) scale(1)}
-    h1,h2{margin:0 0 .4em;font-family:'Outfit', sans-serif}
-    h1{font-size: clamp(28px, 3.6vw, 46px); letter-spacing:.2px; color:var(--accent2)}
-    h2{font-size: clamp(22px, 2.5vw, 34px); color:var(--accent)}
-    p{margin:.25em 0 .6em; color:var(--muted)}
-    ul{margin:.4em 0 0 1.1em}
-    li{margin:.25em 0}
-    .grid{display:grid; gap:16px}
-    .cols-2{grid-template-columns:1fr 1fr}
-    .tag{display:inline-block; padding:.25em .6em; border:1px solid rgba(0,0,0,.15); border-radius:999px; font-size:.9em; color:var(--accent2);}
-    .footer{display:flex; align-items:center; justify-content:space-between; padding:0 20px; color:var(--muted); border-top:1px solid rgba(0,0,0,.1)}
-    .prog{height:4px;background:rgba(0,0,0,.1);border-radius:999px;overflow:hidden;flex:1;margin:0 12px}
-    .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
-    .kbd{display:inline-block;border:1px solid rgba(0,0,0,.2);background:#f1f3f5;padding:.15em .45em;border-radius:6px;margin:0 .1em;color:var(--accent2)}
-    .note{font-size:.9em;color:var(--muted)}
-    .pill{display:inline-block;background:rgba(0,188,212,.1);border:1px solid rgba(0,188,212,.3);padding:.35em .65em;border-radius:999px;margin-right:.4em;color:var(--accent)}
-    .callout{padding:14px 16px;border:1px solid rgba(0,0,0,.1);background:rgba(0,188,212,.05);border-radius:14px}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
-    .box{background:rgba(0,188,212,.05);border:1px dashed rgba(0,188,212,.4);border-radius:12px;padding:10px;text-align:center;font-size:.95em;color:var(--accent2)}
-    .logo{position:absolute;top:20px;left:20px;width:120px}
-    @media (max-width:980px){.cols-2{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}}
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="deck">
-    <div class="slides" id="slides">
-      <img src="new_maru_logo_neutral.png" alt="Maru Logo" class="logo" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fridge Business – WhatsApp Workflow (12‑Slide Deck)</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --card: #f8f9fa;
+        --text: #2d3a3f;
+        --muted: #6c757d;
+        --accent: #00bcd4; /* light teal from logo */
+        --accent2: #2d3a3f; /* dark slate from logo */
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.5 "Outfit", system-ui, -apple-system, Segoe UI, Roboto,
+          Inter, Ubuntu, "Helvetica Neue", Arial;
+      }
+      .deck {
+        height: 100%;
+        display: grid;
+        grid-template-rows: 1fr 60px;
+      }
+      .slides {
+        height: 100%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+      .slide {
+        width: min(1100px, 92vw);
+        height: min(640px, 78vh);
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: var(--shadow);
+        border-radius: 24px;
+        padding: 40px 48px;
+        position: absolute;
+        opacity: 0;
+        transform: translateX(40px) scale(0.98);
+        transition: opacity 0.35s ease,
+          transform 0.45s cubic-bezier(0.2, 0.7, 0.1, 1);
+      }
+      .slide.active {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+      h1,
+      h2 {
+        margin: 0 0 0.4em;
+        font-family: "Outfit", sans-serif;
+      }
+      h1 {
+        font-size: clamp(28px, 3.6vw, 46px);
+        letter-spacing: 0.2px;
+        color: var(--accent2);
+      }
+      h2 {
+        font-size: clamp(22px, 2.5vw, 34px);
+        color: var(--accent);
+      }
+      p {
+        margin: 0.25em 0 0.6em;
+        color: var(--muted);
+      }
+      ul {
+        margin: 0.4em 0 0 1.1em;
+      }
+      li {
+        margin: 0.25em 0;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+      .cols-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.25em 0.6em;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 999px;
+        font-size: 0.9em;
+        color: var(--accent2);
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        color: var(--muted);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .prog {
+        height: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 999px;
+        overflow: hidden;
+        flex: 1;
+        margin: 0 12px;
+      }
+      .bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        width: 0%;
+      }
+      .kbd {
+        display: inline-block;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        background: #f1f3f5;
+        padding: 0.15em 0.45em;
+        border-radius: 6px;
+        margin: 0 0.1em;
+        color: var(--accent2);
+      }
+      .note {
+        font-size: 0.9em;
+        color: var(--muted);
+      }
+      .pill {
+        display: inline-block;
+        background: rgba(0, 188, 212, 0.1);
+        border: 1px solid rgba(0, 188, 212, 0.3);
+        padding: 0.35em 0.65em;
+        border-radius: 999px;
+        margin-right: 0.4em;
+        color: var(--accent);
+      }
+      .callout {
+        padding: 14px 16px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(0, 188, 212, 0.05);
+        border-radius: 14px;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", monospace;
+      }
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .box {
+        background: rgba(0, 188, 212, 0.05);
+        border: 1px dashed rgba(0, 188, 212, 0.4);
+        border-radius: 12px;
+        padding: 10px;
+        text-align: center;
+        font-size: 0.95em;
+        color: var(--accent2);
+      }
+      .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 120px;
+      }
+      @media (max-width: 980px) {
+        .cols-2 {
+          grid-template-columns: 1fr;
+        }
+        .flow {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="deck">
+      <div class="slides" id="slides">
+        <img src="new_maru_logo_neutral.png" alt="Maru Logo" class="logo" />
 
-      <!-- Slide 1: Title -->
-      <section class="slide active">
-        <h1>Fridge Business – WhatsApp Funnel</h1>
-        <p class="note">Discovery Meeting Deck • Max 12 slides • Host on GitHub Pages</p>
-        <div class="callout">
-          <span class="pill">Goal</span> Turn lamp‑pole leads into a structured WhatsApp workflow that scales across 40+ villages.
-        </div>
-        <ul>
-          <li>Reach more customers via WhatsApp</li>
-          <li>Simplify intake, quoting & dispatch</li>
-          <li>Build a contact database for broadcasts</li>
-        </ul>
-      </section>
+        <!-- Slide 1: Title -->
+        <section class="slide active">
+          <h1>Fridge Business – WhatsApp Funnel</h1>
+          <p class="note">
+            Discovery Meeting Deck • Max 12 slides • Host on GitHub Pages
+          </p>
+          <div class="callout">
+            <span class="pill">Goal</span> Turn lamp‑pole leads into a
+            structured WhatsApp workflow that scales across 40+ villages.
+          </div>
+          <ul>
+            <li>Reach more customers via WhatsApp</li>
+            <li>Simplify intake, quoting & dispatch</li>
+            <li>Build a contact database for broadcasts</li>
+          </ul>
+        </section>
 
-      <!-- Slide 2: Current State -->
-      <section class="slide">
-        <h1>Current State</h1>
-        <div class="cols-2">
-          <div>
-            <h2>Challenges</h2>
-            <ul>
-              <li>Manual lead collection from lamp posts</li>
-              <li>Inconsistent follow-up process</li>
-              <li>No centralized customer database</li>
-              <li>Difficulty tracking conversions</li>
-            </ul>
+        <!-- Slide 2: Current State -->
+        <section class="slide">
+          <h1>Current State</h1>
+          <div class="cols-2">
+            <div>
+              <h2>Challenges</h2>
+              <ul>
+                <li>Manual lead collection from lamp posts</li>
+                <li>Inconsistent follow-up process</li>
+                <li>No centralized customer database</li>
+                <li>Difficulty tracking conversions</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Opportunities</h2>
+              <ul>
+                <li>40+ villages to scale across</li>
+                <li>High mobile phone penetration</li>
+                <li>WhatsApp is primary communication</li>
+                <li>Growing demand for refrigeration</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h2>Opportunities</h2>
-            <ul>
-              <li>40+ villages to scale across</li>
-              <li>High mobile phone penetration</li>
-              <li>WhatsApp is primary communication</li>
-              <li>Growing demand for refrigeration</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 3: Proposed Solution -->
-      <section class="slide">
-        <h1>Proposed Solution</h1>
-        <h2>WhatsApp Business API Integration</h2>
-        <div class="flow">
-          <div class="box">Lead Capture</div>
-          <div class="box">Auto Response</div>
-          <div class="box">Qualification</div>
-          <div class="box">Follow-up</div>
-        </div>
-        <div class="callout">
-          <span class="pill">Key Features</span> Automated responses, lead scoring, CRM integration, and broadcast capabilities
-        </div>
-      </section>
+        <!-- Slide 3: Proposed Solution -->
+        <section class="slide">
+          <h1>Proposed Solution</h1>
+          <h2>WhatsApp Business API Integration</h2>
+          <div class="flow">
+            <div class="box">Lead Capture</div>
+            <div class="box">Auto Response</div>
+            <div class="box">Qualification</div>
+            <div class="box">Follow-up</div>
+          </div>
+          <div class="callout">
+            <span class="pill">Key Features</span> Automated responses, lead
+            scoring, CRM integration, and broadcast capabilities
+          </div>
+        </section>
 
-      <!-- Slide 4: Workflow Overview -->
-      <section class="slide">
-        <h1>Workflow Overview</h1>
-        <div class="flow">
-          <div class="box">
-            <strong>1. Lead Capture</strong><br>
-            QR code on lamp posts
+        <!-- Slide 4: Workflow Overview -->
+        <section class="slide">
+          <h1>Workflow Overview</h1>
+          <div class="flow">
+            <div class="box">
+              <strong>1. Lead Capture</strong><br />
+              QR code on lamp posts
+            </div>
+            <div class="box">
+              <strong>2. Welcome Message</strong><br />
+              Auto-reply with options
+            </div>
+            <div class="box">
+              <strong>3. Qualification</strong><br />
+              Quick survey via chat
+            </div>
+            <div class="box">
+              <strong>4. Routing</strong><br />
+              Assign to sales rep
+            </div>
           </div>
-          <div class="box">
-            <strong>2. Welcome Message</strong><br>
-            Auto-reply with options
+          <div class="flow">
+            <div class="box">
+              <strong>5. Follow-up</strong><br />
+              Scheduled reminders
+            </div>
+            <div class="box">
+              <strong>6. Conversion</strong><br />
+              Quote & close deal
+            </div>
+            <div class="box">
+              <strong>7. Database</strong><br />
+              Store customer info
+            </div>
+            <div class="box">
+              <strong>8. Broadcast</strong><br />
+              Marketing campaigns
+            </div>
           </div>
-          <div class="box">
-            <strong>3. Qualification</strong><br>
-            Quick survey via chat
-          </div>
-          <div class="box">
-            <strong>4. Routing</strong><br>
-            Assign to sales rep
-          </div>
-        </div>
-        <div class="flow">
-          <div class="box">
-            <strong>5. Follow-up</strong><br>
-            Scheduled reminders
-          </div>
-          <div class="box">
-            <strong>6. Conversion</strong><br>
-            Quote & close deal
-          </div>
-          <div class="box">
-            <strong>7. Database</strong><br>
-            Store customer info
-          </div>
-          <div class="box">
-            <strong>8. Broadcast</strong><br>
-            Marketing campaigns
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 5: Technical Architecture -->
-      <section class="slide">
-        <h1>Technical Architecture</h1>
-        <div class="cols-2">
-          <div>
-            <h2>Components</h2>
-            <ul>
-              <li>WhatsApp Business API</li>
-              <li>Webhook endpoints</li>
-              <li>CRM integration</li>
-              <li>Database storage</li>
-              <li>Admin dashboard</li>
-            </ul>
+        <!-- Slide 5: Technical Architecture -->
+        <section class="slide">
+          <h1>Technical Architecture</h1>
+          <div class="cols-2">
+            <div>
+              <h2>Components</h2>
+              <ul>
+                <li>WhatsApp Business API</li>
+                <li>Webhook endpoints</li>
+                <li>CRM integration</li>
+                <li>Database storage</li>
+                <li>Admin dashboard</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Benefits</h2>
+              <ul>
+                <li>Scalable infrastructure</li>
+                <li>Real-time messaging</li>
+                <li>Data analytics</li>
+                <li>Mobile-first design</li>
+                <li>Cost-effective</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h2>Benefits</h2>
-            <ul>
-              <li>Scalable infrastructure</li>
-              <li>Real-time messaging</li>
-              <li>Data analytics</li>
-              <li>Mobile-first design</li>
-              <li>Cost-effective</li>
-            </ul>
+          <div class="callout">
+            <span class="pill">Integration</span> Works with existing systems
+            and can be deployed across multiple villages
           </div>
-        </div>
-        <div class="callout">
-          <span class="pill">Integration</span> Works with existing systems and can be deployed across multiple villages
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 6: Lead Capture Strategy -->
-      <section class="slide">
-        <h1>Lead Capture Strategy</h1>
-        <h2>QR Code Implementation</h2>
-        <div class="grid">
-          <div>
-            <h3>Lamp Post Placement</h3>
-            <ul>
-              <li>High-traffic areas</li>
-              <li>Near bus stops</li>
-              <li>Market entrances</li>
-              <li>School zones</li>
-            </ul>
+        <!-- Slide 6: Lead Capture Strategy -->
+        <section class="slide">
+          <h1>Lead Capture Strategy</h1>
+          <h2>QR Code Implementation</h2>
+          <div class="grid">
+            <div>
+              <h3>Lamp Post Placement</h3>
+              <ul>
+                <li>High-traffic areas</li>
+                <li>Near bus stops</li>
+                <li>Market entrances</li>
+                <li>School zones</li>
+              </ul>
+            </div>
+            <div>
+              <h3>QR Code Design</h3>
+              <ul>
+                <li>Clear, scannable format</li>
+                <li>Branded with company logo</li>
+                <li>Weather-resistant material</li>
+                <li>Multiple language support</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h3>QR Code Design</h3>
-            <ul>
-              <li>Clear, scannable format</li>
-              <li>Branded with company logo</li>
-              <li>Weather-resistant material</li>
-              <li>Multiple language support</li>
-            </ul>
+          <div class="callout">
+            <span class="pill">Expected Results</span> 3-5x increase in lead
+            capture compared to current manual process
           </div>
-        </div>
-        <div class="callout">
-          <span class="pill">Expected Results</span> 3-5x increase in lead capture compared to current manual process
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 7: Automated Messaging -->
-      <section class="slide">
-        <h1>Automated Messaging System</h1>
-        <div class="cols-2">
-          <div>
-            <h2>Welcome Sequence</h2>
-            <ul>
-              <li>Instant acknowledgment</li>
-              <li>Service introduction</li>
-              <li>Quick qualification</li>
-              <li>Next steps guidance</li>
-            </ul>
+        <!-- Slide 7: Automated Messaging -->
+        <section class="slide">
+          <h1>Automated Messaging System</h1>
+          <div class="cols-2">
+            <div>
+              <h2>Welcome Sequence</h2>
+              <ul>
+                <li>Instant acknowledgment</li>
+                <li>Service introduction</li>
+                <li>Quick qualification</li>
+                <li>Next steps guidance</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Follow-up Automation</h2>
+              <ul>
+                <li>Scheduled reminders</li>
+                <li>Personalized messages</li>
+                <li>Appointment booking</li>
+                <li>Feedback collection</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h2>Follow-up Automation</h2>
-            <ul>
-              <li>Scheduled reminders</li>
-              <li>Personalized messages</li>
-              <li>Appointment booking</li>
-              <li>Feedback collection</li>
-            </ul>
+          <div class="callout">
+            <span class="pill">Languages</span> Support for local languages to
+            ensure maximum reach and understanding
           </div>
-        </div>
-        <div class="callout">
-          <span class="pill">Languages</span> Support for local languages to ensure maximum reach and understanding
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 8: CRM Integration -->
-      <section class="slide">
-        <h1>CRM Integration</h1>
-        <h2>Customer Data Management</h2>
-        <div class="flow">
-          <div class="box">
-            <strong>Contact Info</strong><br>
-            Name, phone, location
+        <!-- Slide 8: CRM Integration -->
+        <section class="slide">
+          <h1>CRM Integration</h1>
+          <h2>Customer Data Management</h2>
+          <div class="flow">
+            <div class="box">
+              <strong>Contact Info</strong><br />
+              Name, phone, location
+            </div>
+            <div class="box">
+              <strong>Lead Source</strong><br />
+              QR code, referral, etc.
+            </div>
+            <div class="box">
+              <strong>Status</strong><br />
+              New, qualified, converted
+            </div>
+            <div class="box">
+              <strong>History</strong><br />
+              All interactions
+            </div>
           </div>
-          <div class="box">
-            <strong>Lead Source</strong><br>
-            QR code, referral, etc.
+          <div class="callout">
+            <span class="pill">Analytics</span> Track conversion rates, response
+            times, and customer journey insights
           </div>
-          <div class="box">
-            <strong>Status</strong><br>
-            New, qualified, converted
-          </div>
-          <div class="box">
-            <strong>History</strong><br>
-            All interactions
-          </div>
-        </div>
-        <div class="callout">
-          <span class="pill">Analytics</span> Track conversion rates, response times, and customer journey insights
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 9: Broadcast Capabilities -->
-      <section class="slide">
-        <h1>Broadcast Capabilities</h1>
-        <div class="cols-2">
-          <div>
-            <h2>Marketing Campaigns</h2>
-            <ul>
-              <li>Seasonal promotions</li>
-              <li>New product launches</li>
-              <li>Service reminders</li>
-              <li>Customer surveys</li>
-            </ul>
+        <!-- Slide 9: Broadcast Capabilities -->
+        <section class="slide">
+          <h1>Broadcast Capabilities</h1>
+          <div class="cols-2">
+            <div>
+              <h2>Marketing Campaigns</h2>
+              <ul>
+                <li>Seasonal promotions</li>
+                <li>New product launches</li>
+                <li>Service reminders</li>
+                <li>Customer surveys</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Segmentation</h2>
+              <ul>
+                <li>By location (village)</li>
+                <li>By service type</li>
+                <li>By customer status</li>
+                <li>By engagement level</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h2>Segmentation</h2>
-            <ul>
-              <li>By location (village)</li>
-              <li>By service type</li>
-              <li>By customer status</li>
-              <li>By engagement level</li>
-            </ul>
+          <div class="callout">
+            <span class="pill">Reach</span> Send targeted messages to specific
+            customer segments across all 40+ villages
           </div>
-        </div>
-        <div class="callout">
-          <span class="pill">Reach</span> Send targeted messages to specific customer segments across all 40+ villages
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 10: Implementation Timeline -->
-      <section class="slide">
-        <h1>Implementation Timeline</h1>
-        <div class="grid">
-          <div>
-            <h3>Phase 1 (Weeks 1-2)</h3>
-            <ul>
-              <li>API setup & testing</li>
-              <li>Basic message templates</li>
-              <li>QR code generation</li>
-            </ul>
+        <!-- Slide 10: Implementation Timeline -->
+        <section class="slide">
+          <h1>Implementation Timeline</h1>
+          <div class="grid">
+            <div>
+              <h3>Phase 1 (Weeks 1-2)</h3>
+              <ul>
+                <li>API setup & testing</li>
+                <li>Basic message templates</li>
+                <li>QR code generation</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Phase 2 (Weeks 3-4)</h3>
+              <ul>
+                <li>CRM integration</li>
+                <li>Workflow automation</li>
+                <li>Pilot village testing</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h3>Phase 2 (Weeks 3-4)</h3>
-            <ul>
-              <li>CRM integration</li>
-              <li>Workflow automation</li>
-              <li>Pilot village testing</li>
-            </ul>
+          <div class="grid">
+            <div>
+              <h3>Phase 3 (Weeks 5-6)</h3>
+              <ul>
+                <li>Full deployment</li>
+                <li>Staff training</li>
+                <li>Performance monitoring</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Phase 4 (Ongoing)</h3>
+              <ul>
+                <li>Optimization</li>
+                <li>Feature enhancements</li>
+                <li>Scale to new villages</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="grid">
-          <div>
-            <h3>Phase 3 (Weeks 5-6)</h3>
-            <ul>
-              <li>Full deployment</li>
-              <li>Staff training</li>
-              <li>Performance monitoring</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Phase 4 (Ongoing)</h3>
-            <ul>
-              <li>Optimization</li>
-              <li>Feature enhancements</li>
-              <li>Scale to new villages</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 11: Success Metrics -->
-      <section class="slide">
-        <h1>Success Metrics</h1>
-        <div class="cols-2">
-          <div>
-            <h2>Key Performance Indicators</h2>
-            <ul>
-              <li>Lead capture rate increase</li>
-              <li>Response time reduction</li>
-              <li>Conversion rate improvement</li>
-              <li>Customer satisfaction scores</li>
-            </ul>
+        <!-- Slide 11: Success Metrics -->
+        <section class="slide">
+          <h1>Success Metrics</h1>
+          <div class="cols-2">
+            <div>
+              <h2>Key Performance Indicators</h2>
+              <ul>
+                <li>Lead capture rate increase</li>
+                <li>Response time reduction</li>
+                <li>Conversion rate improvement</li>
+                <li>Customer satisfaction scores</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Expected Outcomes</h2>
+              <ul>
+                <li>50% faster lead processing</li>
+                <li>3x more qualified leads</li>
+                <li>40% increase in conversions</li>
+                <li>Centralized customer database</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h2>Expected Outcomes</h2>
-            <ul>
-              <li>50% faster lead processing</li>
-              <li>3x more qualified leads</li>
-              <li>40% increase in conversions</li>
-              <li>Centralized customer database</li>
-            </ul>
+          <div class="callout">
+            <span class="pill">ROI</span> Expected 200% return on investment
+            within 6 months through increased efficiency and conversions
           </div>
-        </div>
-        <div class="callout">
-          <span class="pill">ROI</span> Expected 200% return on investment within 6 months through increased efficiency and conversions
-        </div>
-      </section>
+        </section>
 
-      <!-- Slide 12: Next Steps -->
-      <section class="slide">
-        <h1>Next Steps</h1>
-        <div class="callout">
-          <span class="pill">Immediate Actions</span> Schedule technical discovery session to finalize requirements and begin implementation
-        </div>
-        <div class="grid">
-          <div>
-            <h3>Technical Requirements</h3>
-            <ul>
-              <li>WhatsApp Business API access</li>
-              <li>Server infrastructure setup</li>
-              <li>Database configuration</li>
-              <li>Security implementation</li>
-            </ul>
+        <!-- Slide 12: Next Steps -->
+        <section class="slide">
+          <h1>Next Steps</h1>
+          <div class="callout">
+            <span class="pill">Immediate Actions</span> Schedule technical
+            discovery session to finalize requirements and begin implementation
           </div>
-          <div>
-            <h3>Business Requirements</h3>
-            <ul>
-              <li>Message template approval</li>
-              <li>Staff training schedule</li>
-              <li>Pilot village selection</li>
-              <li>Success criteria definition</li>
-            </ul>
+          <div class="grid">
+            <div>
+              <h3>Technical Requirements</h3>
+              <ul>
+                <li>WhatsApp Business API access</li>
+                <li>Server infrastructure setup</li>
+                <li>Database configuration</li>
+                <li>Security implementation</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Business Requirements</h3>
+              <ul>
+                <li>Message template approval</li>
+                <li>Staff training schedule</li>
+                <li>Pilot village selection</li>
+                <li>Success criteria definition</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="callout">
-          <span class="pill">Contact</span> Ready to discuss implementation details and answer any questions about the proposed solution
-        </div>
-      </section>
-    </div>
-
-    <div class="footer">
-      <div>
-        <span class="kbd">←</span> <span class="kbd">→</span> to navigate • <span class="kbd">F</span> fullscreen
+          <div class="callout">
+            <span class="pill">Contact</span> Ready to discuss implementation
+            details and answer any questions about the proposed solution
+          </div>
+        </section>
       </div>
-      <div class="prog"><div class="bar" id="bar"></div></div>
-      <div id="count">1 / 12</div>
+
+      <div class="footer">
+        <div>
+          <span class="kbd">←</span> <span class="kbd">→</span> to navigate •
+          <span class="kbd">F</span> fullscreen
+        </div>
+        <div class="prog"><div class="bar" id="bar"></div></div>
+        <div id="count">1 / 12</div>
+      </div>
     </div>
-  </div>
 
-  <script>
-    // Wait for DOM to be ready
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM loaded, initializing presentation...');
-      
-    const slides = Array.from(document.querySelectorAll('.slide'));
-      let currentSlide = 0;
-      const totalSlides = slides.length;
-    const bar = document.getElementById('bar');
-    const count = document.getElementById('count');
+    <script>
+      // Wait for DOM to be ready
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOM loaded, initializing presentation...");
 
-      console.log('Found slides:', totalSlides);
+        const slides = Array.from(document.querySelectorAll(".slide"));
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        const bar = document.getElementById("bar");
+        const count = document.getElementById("count");
 
-      function updateDisplay() {
-        // Hide all slides
-        slides.forEach((slide, index) => {
-          slide.classList.toggle('active', index === currentSlide);
+        console.log("Found slides:", totalSlides);
+
+        function updateDisplay() {
+          // Hide all slides
+          slides.forEach((slide, index) => {
+            slide.classList.toggle("active", index === currentSlide);
+          });
+
+          // Update progress bar
+          const progress = ((currentSlide + 1) / totalSlides) * 100;
+          bar.style.width = progress + "%";
+
+          // Update counter
+          count.textContent = currentSlide + 1 + " / " + totalSlides;
+
+          console.log("Current slide:", currentSlide + 1, "of", totalSlides);
+        }
+
+        function nextSlide() {
+          if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateDisplay();
+          }
+        }
+
+        function prevSlide() {
+          if (currentSlide > 0) {
+            currentSlide--;
+            updateDisplay();
+          }
+        }
+
+        // Keyboard navigation
+        document.addEventListener("keydown", function (e) {
+          console.log("Key pressed:", e.key);
+
+          switch (e.key) {
+            case "ArrowRight":
+            case "Right":
+              e.preventDefault();
+              nextSlide();
+              break;
+            case "ArrowLeft":
+            case "Left":
+              e.preventDefault();
+              prevSlide();
+              break;
+            case "f":
+            case "F":
+              e.preventDefault();
+              if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen?.();
+              } else {
+                document.exitFullscreen?.();
+              }
+              break;
+          }
         });
-        
-        // Update progress bar
-        const progress = ((currentSlide + 1) / totalSlides) * 100;
-        bar.style.width = progress + '%';
-        
-        // Update counter
-        count.textContent = (currentSlide + 1) + ' / ' + totalSlides;
-        
-        console.log('Current slide:', currentSlide + 1, 'of', totalSlides);
-      }
 
-      function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-          currentSlide++;
-          updateDisplay();
-        }
-      }
-
-      function prevSlide() {
-        if (currentSlide > 0) {
-          currentSlide--;
-          updateDisplay();
-        }
-      }
-
-      // Keyboard navigation
-      document.addEventListener('keydown', function(e) {
-        console.log('Key pressed:', e.key);
-        
-        switch(e.key) {
-          case 'ArrowRight':
-          case 'Right':
-            e.preventDefault();
-            nextSlide();
-            break;
-          case 'ArrowLeft':
-          case 'Left':
-            e.preventDefault();
-            prevSlide();
-            break;
-          case 'f':
-          case 'F':
-            e.preventDefault();
-            if (!document.fullscreenElement) {
-              document.documentElement.requestFullscreen?.();
-            } else {
-              document.exitFullscreen?.();
+        // Click to advance
+        document
+          .getElementById("slides")
+          .addEventListener("click", function (e) {
+            if (!e.target.closest("button") && !e.target.closest("a")) {
+              nextSlide();
             }
-            break;
+          });
+
+        // Hash navigation
+        function handleHashChange() {
+          const hash = location.hash.replace("#", "");
+          const slideNumber = parseInt(hash, 10);
+          if (
+            !isNaN(slideNumber) &&
+            slideNumber >= 1 &&
+            slideNumber <= totalSlides
+          ) {
+            currentSlide = slideNumber - 1;
+            updateDisplay();
+          }
         }
+
+        window.addEventListener("hashchange", handleHashChange);
+
+        // Initialize
+        handleHashChange();
+        updateDisplay();
+
+        // Ensure focus for keyboard events
+        document.body.tabIndex = -1;
+        document.body.focus();
+
+        console.log("Presentation initialized successfully");
       });
-
-      // Click to advance
-      document.getElementById('slides').addEventListener('click', function(e) {
-        if (!e.target.closest('button') && !e.target.closest('a')) {
-          nextSlide();
-        }
-      });
-
-      // Hash navigation
-      function handleHashChange() {
-        const hash = location.hash.replace('#', '');
-        const slideNumber = parseInt(hash, 10);
-        if (!isNaN(slideNumber) && slideNumber >= 1 && slideNumber <= totalSlides) {
-          currentSlide = slideNumber - 1;
-          updateDisplay();
-        }
-      }
-
-      window.addEventListener('hashchange', handleHashChange);
-      
-      // Initialize
-      handleHashChange();
-      updateDisplay();
-      
-      // Ensure focus for keyboard events
-      document.body.tabIndex = -1;
-      document.body.focus();
-      
-      console.log('Presentation initialized successfully');
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
