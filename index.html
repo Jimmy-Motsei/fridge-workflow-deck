@@ -407,25 +407,64 @@
       count.textContent = (idx+1)+' / '+total;
     }
 
-    function next(){ i = Math.min(total-1, i+1); show(i); }
-    function prev(){ i = Math.max(0, i-1); show(i); }
+    function next(){ 
+      i = Math.min(total-1, i+1); 
+      show(i); 
+      console.log('Next slide:', i+1);
+    }
+    function prev(){ 
+      i = Math.max(0, i-1); 
+      show(i); 
+      console.log('Previous slide:', i+1);
+    }
 
-    window.addEventListener('keydown', e=>{
-      if(e.key==='ArrowRight') next();
-      if(e.key==='ArrowLeft') prev();
-      if(e.key.toLowerCase()==='f'){
-        const el = document.documentElement; if(!document.fullscreenElement){ el.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
+    // Enhanced keyboard event handling
+    document.addEventListener('keydown', function(e){
+      console.log('Key pressed:', e.key);
+      if(e.key === 'ArrowRight' || e.key === 'Right') {
+        e.preventDefault();
+        next();
+      }
+      if(e.key === 'ArrowLeft' || e.key === 'Left') {
+        e.preventDefault();
+        prev();
+      }
+      if(e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        const el = document.documentElement; 
+        if(!document.fullscreenElement){ 
+          el.requestFullscreen?.(); 
+        } else { 
+          document.exitFullscreen?.(); 
+        }
       }
     });
 
-    document.getElementById('slides').addEventListener('click', next);
+    // Click to advance
+    document.getElementById('slides').addEventListener('click', function(e) {
+      // Don't advance if clicking on interactive elements
+      if (!e.target.closest('button') && !e.target.closest('a')) {
+        next();
+      }
+    });
 
+    // Hash navigation
     function fromHash(){
       const n = parseInt(location.hash.replace('#',''),10);
-      if(!isNaN(n) && n>=1 && n<=total){ i = n-1; show(i); }
+      if(!isNaN(n) && n>=1 && n<=total){ 
+        i = n-1; 
+        show(i); 
+      }
     }
     window.addEventListener('hashchange', fromHash);
+    
+    // Initialize
     fromHash();
+    show(0);
+    
+    // Make sure the page can receive focus for keyboard events
+    document.body.tabIndex = -1;
+    document.body.focus();
   </script>
 </body>
 </html>
