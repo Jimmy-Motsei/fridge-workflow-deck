@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp Fridge Cost Estimate</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --card: #f8f9fa;
+        --text: #2d3a3f;
+        --muted: #6c757d;
+        --accent: #00bcd4;
+        --accent2: #2d3a3f;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 8px 20px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        box-sizing: border-box;
+      }
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        color: var(--accent2);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        font-size: 14px;
+      }
+      .nav-links a:hover {
+        background: rgba(0, 188, 212, 0.1);
+        color: var(--accent);
+      }
+      .nav-links a.active {
+        background: var(--accent);
+        color: white;
+      }
+      body {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+
+  <body class="stackedit">
+    <nav class="navbar">
+      <div style="display: flex; align-items: center; gap: 15px">
+        <img
+          src="new_maru_logo_neutral-320.webp"
+          alt="Maru Logo"
+          style="width: 80px; height: auto"
+        />
+        <strong style="color: var(--accent2); text-transform: uppercase"
+          >Fridge Workflow Deck</strong
+        >
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Presentation</a></li>
+        <li><a href="Project-Summary-160925.html">Summary</a></li>
+        <li>
+          <a href="Client-Responsibilities-160925.html">Responsibilities</a>
+        </li>
+        <li><a href="whatsApp-fridge-solution-160925.html">Agreement</a></li>
+        <li>
+          <a href="whatsapp_fridge_cost_estimate.html" class="active"
+            >Cost Estimate</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="stackedit__html">
+      <h1 id="client-borne-cost-estimate-whatsapp-fridge-workflow">
+        Client-Borne Cost Estimate (WhatsApp Fridge Workflow)
+      </h1>
+      <p>
+        <strong>Date:</strong> 2025-09-16<br />
+        <strong>Currency:</strong> ZAR (South African Rand)<br />
+        <strong>Context:</strong> Costs the client will pay directly (or as
+        pass-through). Provider build fees and post-trial subscription are
+        excluded. WhatsApp template pricing varies by country/category—scenarios
+        below use <strong>assumed per-template averages</strong> to give you a
+        planning range.
+      </p>
+      <h2 id="one-time-costs">One-Time Costs</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Assumption</th>
+            <th>Estimate (ZAR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Domain registration</td>
+            <td><code>.co.za</code> or similar</td>
+            <td><strong>120–300</strong> (renewal annually)</td>
+          </tr>
+          <tr>
+            <td>QR sticker printing</td>
+            <td>500 UV-laminated vinyl stickers @ R5–12 each</td>
+            <td><strong>2,500–6,000</strong></td>
+          </tr>
+          <tr>
+            <td>Field deployment (stickers)</td>
+            <td>1–3 field days incl. transport</td>
+            <td><strong>1,500–5,000</strong></td>
+          </tr>
+          <tr>
+            <td>Business verification &amp; access</td>
+            <td>Admin setup, docs</td>
+            <td><strong>0</strong></td>
+          </tr>
+          <tr>
+            <td>Brand assets &amp; English copy</td>
+            <td>You supply</td>
+            <td><strong>0</strong></td>
+          </tr>
+          <tr>
+            <td>Village list &amp; (optional) pole IDs</td>
+            <td>You supply CSV</td>
+            <td><strong>0</strong></td>
+          </tr>
+          <tr>
+            <td>Test device (optional)</td>
+            <td>Assuming you have one</td>
+            <td><strong>0</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>One-time subtotal:</strong> <strong>ZAR 4,120 – 11,300</strong
+        ><br />
+        <em
+          >(Assumes 500 stickers. Add ~R500–R1,200 per extra 100 stickers.)</em
+        >
+      </p>
+      <h2 id="recurring-monthly-costs-during-trial--beyond">
+        Recurring Monthly Costs (During Trial &amp; Beyond)
+      </h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Assumption</th>
+            <th>Monthly (ZAR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dedicated WhatsApp SIM</td>
+            <td>1 line</td>
+            <td><strong>50–200</strong></td>
+          </tr>
+          <tr>
+            <td>Shared mailbox (alerts/KPI emails)</td>
+            <td>e.g., Microsoft/Google workspace</td>
+            <td><strong>0–99</strong></td>
+          </tr>
+          <tr>
+            <td>WhatsApp template message fees (Meta)</td>
+            <td>See <strong>usage scenarios</strong> below</td>
+            <td><strong>variable</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 id="whatsapp-template-usage-scenarios-planning-ranges">
+        WhatsApp Template Usage Scenarios (planning ranges)
+      </h2>
+      <p>
+        Assumed <strong>average delivered template cost</strong>:
+        <strong>R1.20–R2.00</strong> (illustrative). Actuals depend on recipient
+        country mix &amp; template category.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Templates / month</th>
+            <th>Template fees (ZAR)</th>
+            <th>Monthly total incl. SIM &amp; mailbox (ZAR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A — Light</strong></td>
+            <td>300</td>
+            <td><strong>360–600</strong></td>
+            <td><strong>410–899</strong></td>
+          </tr>
+          <tr>
+            <td><strong>B — Moderate</strong></td>
+            <td>800</td>
+            <td><strong>960–1,600</strong></td>
+            <td><strong>1,010–1,899</strong></td>
+          </tr>
+          <tr>
+            <td><strong>C — Active</strong></td>
+            <td>1,500</td>
+            <td><strong>1,800–3,000</strong></td>
+            <td><strong>1,850–3,299</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Base monthly (excl. templates):</strong>
+        <strong>R50–R299</strong> (SIM + mailbox). Domain renewal: ~R120 per
+        year (not monthly).
+      </p>
+      <h2 id="optional-client-extras-if-you-choose-to-procure">
+        Optional Client Extras (if you choose to procure)
+      </h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Assumption</th>
+            <th>Estimate (ZAR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Setswana translation vendor</td>
+            <td>~800 words @ R1.8–2.5/word</td>
+            <td><strong>1,500–2,000</strong> (one-time)</td>
+          </tr>
+          <tr>
+            <td>Additional SIM lines</td>
+            <td>per extra number</td>
+            <td><strong>50–200 / mo</strong></td>
+          </tr>
+          <tr>
+            <td>Additional mailboxes</td>
+            <td>per mailbox</td>
+            <td><strong>0–99 / mo</strong></td>
+          </tr>
+          <tr>
+            <td>Spare test phone</td>
+            <td>entry-level Android</td>
+            <td><strong>1,500–3,500</strong> (one-time)</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 id="assumptions--notes">Assumptions &amp; Notes</h2>
+      <ul>
+        <li>
+          v1 ships <strong>English</strong>; <strong>Setswana</strong> added
+          post-pilot (translation cost only if you ask us to procure it).
+        </li>
+        <li>
+          Client pays
+          <strong>Meta’s WhatsApp template message fees</strong> directly (or
+          via card on file in Business Manager). Service messages inside the
+          customer service window are generally free; outbound templates are
+          billable.
+        </li>
+        <li>
+          Quantities (stickers, templates/month) can be adjusted—totals scale
+          linearly.
+        </li>
+        <li>
+          Post-trial <strong>subscription pricing is TBD</strong> and will be
+          proposed after the build and 2-month trial once real usage and scaling
+          prospects are known.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -24,14 +24,15 @@
           Inter, Ubuntu, "Helvetica Neue", Arial;
       }
       .deck {
-        height: 100%;
+        height: calc(100% - 50px);
         display: grid;
         grid-template-rows: 1fr 60px;
       }
       .slides {
-        height: 100%;
-        display: grid;
-        place-items: center;
+        height: calc(100% - 60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
         position: relative;
         cursor: pointer;
@@ -45,18 +46,22 @@
         border-radius: 24px;
         padding: 40px 48px;
         position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateX(40px) scale(0.98);
         opacity: 0;
-        transform: translateX(40px) scale(0.98);
         transition: opacity 0.35s ease,
           transform 0.45s cubic-bezier(0.2, 0.7, 0.1, 1);
         cursor: pointer;
+        pointer-events: auto;
       }
       .slide:hover {
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
       }
       .slide.active {
         opacity: 1;
-        transform: translateX(0) scale(1);
+        transform: translate(-50%, -50%) translateX(0) scale(1);
+        pointer-events: auto;
       }
       h1,
       h2 {
@@ -104,6 +109,8 @@
         padding: 0 20px;
         color: var(--muted);
         border-top: 1px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        bottom: 0;
       }
       .prog {
         height: 4px;
@@ -165,12 +172,6 @@
         font-size: 0.95em;
         color: var(--accent2);
       }
-      .logo {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 120px;
-      }
       .navbar {
         position: fixed;
         top: 0;
@@ -179,11 +180,13 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 12px 20px;
+        padding: 8px 20px;
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 50px;
+        box-sizing: border-box;
       }
       .nav-links {
         display: flex;
@@ -210,7 +213,7 @@
         color: white;
       }
       .deck {
-        margin-top: 60px;
+        margin-top: 50px;
       }
       @media (max-width: 980px) {
         .cols-2 {
@@ -228,21 +231,29 @@
   </head>
   <body>
     <nav class="navbar">
-      <div>
-        <strong style="color: var(--accent2);">Fridge Workflow Deck</strong>
+      <div style="display: flex; align-items: center; gap: 15px">
+        <img
+          src="new_maru_logo_neutral-320.webp"
+          alt="Maru Logo"
+          style="width: 80px; height: auto"
+        />
+        <strong style="color: var(--accent2); text-transform: uppercase"
+          >Fridge Workflow Deck</strong
+        >
       </div>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Presentation</a></li>
         <li><a href="Project-Summary-160925.html">Summary</a></li>
-        <li><a href="Client-Responsibilities-160925.html">Responsibilities</a></li>
+        <li>
+          <a href="Client-Responsibilities-160925.html">Responsibilities</a>
+        </li>
         <li><a href="whatsApp-fridge-solution-160925.html">Agreement</a></li>
+        <li><a href="whatsapp_fridge_cost_estimate.html">Cost Estimate</a></li>
       </ul>
     </nav>
-    
+
     <div class="deck">
       <div class="slides" id="slides">
-        <img src="new_maru_logo_neutral.png" alt="Maru Logo" class="logo" />
-
         <!-- Slide 1: Title -->
         <section class="slide active">
           <h1>Fridge Business – WhatsApp Funnel</h1>
@@ -595,8 +606,33 @@
 
       <div class="footer">
         <div>
-          <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> to navigate •
-          <span class="kbd">F</span> fullscreen
+          <button
+            onclick="prevSlide()"
+            style="
+              padding: 8px 16px;
+              background: #6c757d;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              margin-right: 10px;
+            "
+          >
+            ← Previous
+          </button>
+          <button
+            onclick="nextSlide()"
+            style="
+              padding: 8px 16px;
+              background: #007bff;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            "
+          >
+            Next →
+          </button>
         </div>
         <div class="prog"><div class="bar" id="bar"></div></div>
         <div id="count">1 / 12</div>
@@ -647,6 +683,10 @@
           }
         }
 
+        // Make functions globally accessible for buttons
+        window.nextSlide = nextSlide;
+        window.prevSlide = prevSlide;
+
         // Keyboard navigation
         document.addEventListener("keydown", function (e) {
           console.log("Key pressed:", e.key, "Target:", e.target.tagName);
@@ -682,30 +722,29 @@
           }
         });
 
-        // Click to advance - multiple event listeners for better coverage
+        // Click to advance - simplified approach
         const slidesContainer = document.getElementById("slides");
-        
-        // Main click handler
+
+        // Single click handler on slides container
         slidesContainer.addEventListener("click", function (e) {
-          console.log("Click event on slides:", e.target, "Closest nav:", e.target.closest("nav"));
-          // Don't advance if clicking on navigation elements
-          if (!e.target.closest("button") && 
-              !e.target.closest("a") && 
-              !e.target.closest("nav") &&
-              !e.target.closest(".navbar")) {
+          console.log(
+            "Click event on slides:",
+            e.target.tagName,
+            "Closest nav:",
+            e.target.closest("nav")
+          );
+
+          // Only advance if not clicking on navigation elements
+          if (
+            !e.target.closest("nav") &&
+            !e.target.closest(".navbar") &&
+            !e.target.closest("a") &&
+            !e.target.closest("button")
+          ) {
             console.log("Advancing to next slide");
             nextSlide();
           } else {
             console.log("Click blocked - navigation element clicked");
-          }
-        });
-
-        // Also add click handler to the deck container as backup
-        document.querySelector(".deck").addEventListener("click", function (e) {
-          // Only handle if clicking on the deck itself or slides area
-          if (e.target === this || e.target.closest("#slides")) {
-            console.log("Deck click - advancing slide");
-            nextSlide();
           }
         });
 
@@ -736,6 +775,15 @@
         console.log("Presentation initialized successfully");
         console.log("Total slides found:", totalSlides);
         console.log("Current slide index:", currentSlide);
+
+        // Test if functions are working
+        console.log("Testing nextSlide function:", typeof window.nextSlide);
+        console.log("Testing prevSlide function:", typeof window.prevSlide);
+
+        // Add error handling
+        window.addEventListener("error", function (e) {
+          console.error("JavaScript error:", e.error);
+        });
       });
     </script>
   </body>
