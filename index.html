@@ -48,6 +48,10 @@
         transform: translateX(40px) scale(0.98);
         transition: opacity 0.35s ease,
           transform 0.45s cubic-bezier(0.2, 0.7, 0.1, 1);
+        cursor: pointer;
+      }
+      .slide:hover {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
       }
       .slide.active {
         opacity: 1;
@@ -590,7 +594,7 @@
 
       <div class="footer">
         <div>
-          <span class="kbd">←</span> <span class="kbd">→</span> to navigate •
+          <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> to navigate •
           <span class="kbd">F</span> fullscreen
         </div>
         <div class="prog"><div class="bar" id="bar"></div></div>
@@ -643,17 +647,19 @@
 
         // Keyboard navigation
         document.addEventListener("keydown", function (e) {
-          console.log("Key pressed:", e.key);
+          console.log("Key pressed:", e.key, "Target:", e.target.tagName);
 
           switch (e.key) {
             case "ArrowRight":
             case "Right":
               e.preventDefault();
+              console.log("Right arrow - advancing slide");
               nextSlide();
               break;
             case "ArrowLeft":
             case "Left":
               e.preventDefault();
+              console.log("Left arrow - going back slide");
               prevSlide();
               break;
             case "f":
@@ -665,6 +671,12 @@
                 document.exitFullscreen?.();
               }
               break;
+            case " ":
+            case "Space":
+              e.preventDefault();
+              console.log("Spacebar - advancing slide");
+              nextSlide();
+              break;
           }
         });
 
@@ -672,8 +684,16 @@
         document
           .getElementById("slides")
           .addEventListener("click", function (e) {
-            if (!e.target.closest("button") && !e.target.closest("a")) {
+            console.log("Click event on slides:", e.target, "Closest nav:", e.target.closest("nav"));
+            // Don't advance if clicking on navigation elements
+            if (!e.target.closest("button") && 
+                !e.target.closest("a") && 
+                !e.target.closest("nav") &&
+                !e.target.closest(".navbar")) {
+              console.log("Advancing to next slide");
               nextSlide();
+            } else {
+              console.log("Click blocked - navigation element clicked");
             }
           });
 
@@ -702,6 +722,8 @@
         document.body.focus();
 
         console.log("Presentation initialized successfully");
+        console.log("Total slides found:", totalSlides);
+        console.log("Current slide index:", currentSlide);
       });
     </script>
   </body>
