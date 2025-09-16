@@ -6,9 +6,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>whatsApp-fridge-solution-160925</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #f8f9fa;
+      --text: #2d3a3f;
+      --muted: #6c757d;
+      --accent: #00bcd4;
+      --accent2: #2d3a3f;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 12px 20px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-size: 14px;
+    }
+    .nav-links a:hover {
+      background: rgba(0, 188, 212, 0.1);
+      color: var(--accent);
+    }
+    .nav-links a.active {
+      background: var(--accent);
+      color: white;
+    }
+    body {
+      margin-top: 60px;
+    }
+  </style>
 </head>
 
 <body class="stackedit">
+  <nav class="navbar">
+    <div>
+      <strong style="color: var(--accent2);">Fridge Workflow Deck</strong>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Presentation</a></li>
+      <li><a href="Project-Summary-160925.html">Summary</a></li>
+      <li><a href="Client-Responsibilities-160925.html">Responsibilities</a></li>
+      <li><a href="whatsApp-fridge-solution-160925.html" class="active">Agreement</a></li>
+    </ul>
+  </nav>
   <div class="stackedit__html"><h1 id="heads-of-agreement">HEADS OF AGREEMENT</h1>
 <p><em>(Software Build and Pilot Project)</em></p>
 <hr>
