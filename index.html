@@ -34,6 +34,7 @@
         place-items: center;
         overflow: hidden;
         position: relative;
+        cursor: pointer;
       }
       .slide {
         width: min(1100px, 92vw);
@@ -621,8 +622,9 @@
             slide.classList.toggle("active", index === currentSlide);
           });
 
-          // Update progress bar
+          // Update progress bar with animation
           const progress = ((currentSlide + 1) / totalSlides) * 100;
+          bar.style.transition = "width 0.3s ease";
           bar.style.width = progress + "%";
 
           // Update counter
@@ -680,22 +682,32 @@
           }
         });
 
-        // Click to advance
-        document
-          .getElementById("slides")
-          .addEventListener("click", function (e) {
-            console.log("Click event on slides:", e.target, "Closest nav:", e.target.closest("nav"));
-            // Don't advance if clicking on navigation elements
-            if (!e.target.closest("button") && 
-                !e.target.closest("a") && 
-                !e.target.closest("nav") &&
-                !e.target.closest(".navbar")) {
-              console.log("Advancing to next slide");
-              nextSlide();
-            } else {
-              console.log("Click blocked - navigation element clicked");
-            }
-          });
+        // Click to advance - multiple event listeners for better coverage
+        const slidesContainer = document.getElementById("slides");
+        
+        // Main click handler
+        slidesContainer.addEventListener("click", function (e) {
+          console.log("Click event on slides:", e.target, "Closest nav:", e.target.closest("nav"));
+          // Don't advance if clicking on navigation elements
+          if (!e.target.closest("button") && 
+              !e.target.closest("a") && 
+              !e.target.closest("nav") &&
+              !e.target.closest(".navbar")) {
+            console.log("Advancing to next slide");
+            nextSlide();
+          } else {
+            console.log("Click blocked - navigation element clicked");
+          }
+        });
+
+        // Also add click handler to the deck container as backup
+        document.querySelector(".deck").addEventListener("click", function (e) {
+          // Only handle if clicking on the deck itself or slides area
+          if (e.target === this || e.target.closest("#slides")) {
+            console.log("Deck click - advancing slide");
+            nextSlide();
+          }
+        });
 
         // Hash navigation
         function handleHashChange() {
